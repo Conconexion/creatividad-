@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Línea de tiempo — Historia de la creatividad</title>
+  <style>
+    :root{--bg:#f5f7fb;--card:#ffffff;--accent:#4f46e5;--muted:#6b7280}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;background:var(--bg);color:#111}
+    header{background:linear-gradient(90deg,#0f172a 0%, #111827 100%);color:#fff;padding:28px 20px}
+    .container{max-width:1100px;margin:0 auto;padding:24px}
+    h1{margin:0;font-size:1.6rem}
+    p.lead{margin:8px 0 0;color:var(--muted)}
+
+    /* NAV */
+    .nav{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+    .btn{background:var(--card);border:1px solid rgba(15,23,42,0.06);padding:8px 12px;border-radius:999px;cursor:pointer;font-weight:600}
+    .btn.active{background:var(--accent);color:white;border-color:transparent}
+
+    /* Timeline layout */
+    .timeline{position:relative;padding:40px 0}
+    .timeline::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:4px;background:linear-gradient(#ddd,#ccc);transform:translateX(-50%)}
+    .item{position:relative;width:50%;padding:18px 24px}
+    .item .card{background:var(--card);border-radius:12px;padding:14px 18px;box-shadow:0 6px 18px rgba(16,24,40,0.06);border:1px solid rgba(15,23,42,0.04)}
+    .item .date{font-weight:700;color:var(--accent);margin-bottom:6px}
+    .item.left{left:0;text-align:right}
+    .item.right{left:50%}
+    .item.left .card{margin-left:auto}
+    .dot{position:absolute;left:50%;width:14px;height:14px;border-radius:50%;background:var(--accent);transform:translateX(-50%);top:30px;box-shadow:0 0 0 6px rgba(79,70,229,0.06)}
+
+    /* Small screens */
+    @media (max-width:800px){
+      .timeline::before{left:16px}
+      .item{width:100%;padding-left:48px;padding-right:16px;margin-bottom:18px}
+      .item.left,.item.right{left:0;text-align:left}
+      .dot{left:16px;transform:none}
+    }
+
+    /* Hidden by filter */
+    .item.hidden{display:none}
+
+    /* Footer */
+    footer{padding:24px 0;color:var(--muted)}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Línea de tiempo — Historia de la creatividad</h1>
+      <p class="lead">Cronología resumida desde la Prehistoria hasta enfoques contemporáneos.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <nav class="nav" aria-label="Filtrar períodos">
+      <button class="btn active" data-filter="all">Mostrar todo</button>
+      <button class="btn" data-filter="prehistoria">Prehistoria</button>
+      <button class="btn" data-filter="antiguedad">Antigüedad</button>
+      <button class="btn" data-filter="media-ren">Edad Media / Renacimiento</button>
+      <button class="btn" data-filter="modernidad">Modernidad</button>
+      <button class="btn" data-filter="sxx">Siglo XX</button>
+      <button class="btn" data-filter="contemporaneo">Contemporáneo</button>
+    </nav>
+
+    <section class="timeline" id="timeline">
+
+      <!-- Prehistoria -->
+      <article class="item left" data-era="prehistoria">
+        <div class="dot" aria-hidden="true"></div>
+        <div class="card">
+          <div class="date">300,000 a.C. — Prehistoria</div>
+          <div class="content">Los primeros indicios tangibles registrados de la creatividad del ser humano pertenecen al área de las artes, manifestado en las pinturas rupestres.</div>
+        </div>
+      </article>
+
+      <!-- Cultura Griega -->
+      <article class="item right" data-era="antiguedad">
+        <div class="dot" aria-hidden="true"></div>
+        <div class="card">
+          <div class="date">499 a.C. - 323 a.C. — Cultura Griega</div>
+          <div class="content">Se atribuía la creación de algún producto a la inspiración de las musas. Ellas traían talento a los hombres, especialmente en artes y ciencia.</div>
+        </div>
+      </article>
+
+      <!-- Imperio Romano -->
+      <article class="item left" data-era="antiguedad">
+        <div class="dot" aria-hidden="true"></div>
+        <div class="card">
+          <div class="date">27 a.C. - 476 d.C. — Imperio Romano</div>
+          <div class="content">Los romanos atribuían las ideas nuevas al genio individual: seres espirituales que influenciaban y cuidaban a las personas o grupos.</div>
+        </div>
+      </article>
+
+      <!-- Edad Media -->
+      <article class="item right" data-era="media-ren">
+        <div class="dot" aria-hidden="true"></div>
+        <div class="card">
+          <div class="date">476 - 1492 — Edad Media</div>
+          <div class="content">Se creía que la inspiración para inventos provenía de la voluntad divina; las producciones humanas eran deseos de Dios.</div>
+        </div>
+      </article>
+
+      <!-- Renacimiento -->
+      <article class="item left" data-era="media-ren">
+        <div class="dot" aria-hidden="true"></div>
+        <div class="card">
+          <div class="date">S. XV - XVI — Renacimiento</div>
+          <div class="content">Periodo de autorreconocimiento, retorno al saber racional y perfeccionamiento del ser; renovación espiritual y cuestionamiento de la Edad Media.</div>
+        </div>
+      </article>
+
+      <!-- Ilustración -->
+      <article class="item right" data-era="modernidad">
+        <div class="dot" aria-hidden="true"></div>
+        <div class="card">
+          <div class="date">1648 - 1789 — Ilustración</div>
+          <div class="content">Gran desarrollo de inventos; énfasis en la razón. Se buscó unificar ciencia y fe dentro de los límites de la razón.</div>
+        </div>
+      </article>
+
+      <!-- Revolución Industrial -->
+      <article class="item left" data-era="modernidad">
+        <div class="dot" aria-hidden="true"></div>
+        <div class="card">
+          <div class="date">1760 - 1840 — Revolución Industrial</div>
+          <div class="content">Se dejó la idea de genio inspirado divinamente: los talentos se entienden como inteligencia del diseñador del producto.</div>
+        </div>
+      </article>
+
+      <!-- Final siglo XIX - enfermedades mentales -->
+      <article class="item right" data-era="sxx">
+        <div class="dot" aria-hidden="true"></div>
+        <div class="card">
+          <div class="date">1890 — Asociación entre enfermedades mentales y creatividad</div>
+          <div class="content">En esta época se observó una relación muy cercana entre creatividad y trastornos mentales en la literatura científica y artística.</div>
+        </div>
+      </article>
+
+      <!-- Psicoanálisis -->
+      <article class="item left" data-era="sxx">
+        <div class="dot" aria-hidden="true"></div>
+        <div class="card">
+          <div class="date">1896 — Psicoanálisis (Sigmund Freud)</div>
+          <div class="content">Introduce las pulsiones como fuerzas internas que motivan la conducta. Freud divide la personalidad en ello, yo y superyó e intenta explicar el desarrollo de la creatividad; destaca el juego infantil.</div>
+        </div>
+      </article>
+
+      <!-- Cognitivismo Piaget -->
+      <article class="item right" data-era="sxx">
+        <div class="dot" aria-hidden="true"></div>
+        <div class="card">
+          <div class="date">1896 - 1980 — Cognitivismo (Jean Piaget)</div>
+          <div class="content">El pensamiento se estructura por esquemas; énfasis en organización y adaptación y en la importancia del ambiente para el desarrollo cognitivo y creativo.</div>
+        </div>
+      </article>
+
+      <!-- Enfoque neurocientífico siglo XIX -->
+      <article class="item left" data-era="sxx">
+        <div class="dot" aria-hidden="true"></div>
+        <div class="card">
+          <div class="date">S. XIX — Enfoque neurocientífico (Wilhelm Wundt y otros)</div>
+          <div class="content">Investigación sobre procesos cerebrales durante la creatividad; aportes sobre funciones cerebrales relacionadas con la producción creativa.</div>
+        </div>
+      </article>
+
+      <!-- Gestalt -->
+      <article class="item right" data-era="sxx">
+        <div class="dot" aria-hidden="true"></div>
+        <div class="card">
+          <div class="date">S. XX — Gestalt</div>
+          <div class="content">Surge en Alemania; la Gestalt entiende la creatividad como solución novedosa a problemas antiguos: "el todo es más que la suma de sus partes".</div>
+        </div>
+      </article>
+
+      <!-- Asociacionismo (siglo XIX y XXI references) -->
+      <article class="item left" data-era="contemporaneo">
+        <div class="dot" aria-hidden="true"></div>
+        <div class="card">
+          <div class="date">S. XIX / Contemporáneo — Asociacionismo</div>
+          <div class="content">Actividad de aprendizaje donde se responde a estímulos. Proponen repetir estímulos y buscar respuestas diferentes para promover originalidad.</div>
+        </div>
+      </article>
+
+      <!-- Humanismo Maslow -->
+      <article class="item right" data-era="sxx">
+        <div class="dot" aria-hidden="true"></div>
+        <div class="card">
+          <div class="date">1908 - 1970 — Humanismo (Abraham Maslow)</div>
+          <div class="content">La creatividad está vinculada con la autorrealización; Maslow distingue creatividad primaria y secundaria y la relaciona con el desarrollo personal y social.</div>
+        </div>
+      </article>
+
+      <!-- Cibernética 1963 -->
+      <article class="item left" data-era="contemporaneo">
+        <div class="dot" aria-hidden="true"></div>
+        <div class="card">
+          <div class="date">1963 — Cibernética</div>
+          <div class="content">Modelos relacionados con conexiones neuronales en máquinas: autómatas, robots y sistemas que imitan actividades humanas.</div>
+        </div>
+      </article>
+
+      <!-- Humanismo Rogers -->
+      <article class="item right" data-era="sxx">
+        <div class="dot" aria-hidden="true"></div>
+        <div class="card">
+          <div class="date">1902 - 1987 — Humanismo (Carl Rogers)</div>
+          <div class="content">Sostiene que la educación tradicional limita la creatividad; destaca la sensibilidad hacia situaciones y la libertad para pensar y sentir.</div>
+        </div>
+      </article>
+
+      <!-- Conductismo Watson -->
+      <article class="item left" data-era="sxx">
+        <div class="dot" aria-hidden="true"></div>
+        <div class="card">
+          <div class="date">1913 — Conductismo (John Watson)</div>
+          <div class="content">Las producciones creativas pueden estimularse mediante refuerzos; importancia de ambientes organizados por un especialista que provoquen respuestas creativas.</div>
+        </div>
+      </article>
+
+      <!-- Modelo transaccional Ross 1978 -->
+      <article class="item right" data-era="contemporaneo">
+        <div class="dot" aria-hidden="true"></div>
+        <div class="card">
+          <div class="date">1978 — Raymond Ross (Modelo Transaccional)</div>
+          <div class="content">Modelo que describe la comunicación funcional y el intercambio cognoscitivo de símbolos en procesos creativos.</div>
+        </div>
+      </article>
+
+      <!-- Enfoque Social Garaigordobil 1995 -->
+      <article class="item left" data-era="contemporaneo">
+        <div class="dot" aria-hidden="true"></div>
+        <div class="card">
+          <div class="date">1995 — Garaigordobil (Enfoque Social)</div>
+          <div class="content">Relaciona rasgos de personalidad con creatividad buscando patrones; plantea que la personalidad creativa es impredecible.</div>
+        </div>
+      </article>
+
+      <!-- Wertheimer 1997 (Gestalt) -->
+      <article class="item right" data-era="contemporaneo">
+        <div class="dot" aria-hidden="true"></div>
+        <div class="card">
+          <div class="date">1997 — Wertheimer (Gestalt)</div>
+          <div class="content">Distingue entre pensamiento reproductivo (aplicar destrezas anteriores) y pensamiento productivo/creativo.</div>
+        </div>
+      </article>
+
+      <!-- Marín y de la Torre 2000 -->
+      <article class="item left" data-era="contemporaneo">
+        <div class="dot" aria-hidden="true"></div>
+        <div class="card">
+          <div class="date">2000 — Marín y de la Torre (Modelo Transaccional)</div>
+          <div class="content">Propone que la creatividad depende del modo de realización en relación con el medio y la comunicación espontánea como manifestación creativa.</div>
+        </div>
+      </article>
+
+      <!-- 2002 Burger y Ardila y Lazarus y Fokman -->
+      <article class="item right" data-era="contemporaneo">
+        <div class="dot" aria-hidden="true"></div>
+        <div class="card">
+          <div class="date">2002 — Burger & Ardila; Lazarus & Fokman</div>
+          <div class="content">Aportes desde la psicología filosófica y el modelo transaccional: evaluación y afrontamiento de consecuencias como parte del proceso creativo.</div>
+        </div>
+      </article>
+
+      <!-- 2004 Laplanche y Pontalis -->
+      <article class="item left" data-era="contemporaneo">
+        <div class="dot" aria-hidden="true"></div>
+        <div class="card">
+          <div class="date">2004 — Laplanche & Pontalis</div>
+          <div class="content">Definen procesos de sublimación para explicar actividades humanas creativas que no parecen relacionadas con la sexualidad pero provienen de pulsiones.</div>
+        </div>
+      </article>
+
+      <!-- 2006 varios: Agambe, De la Torre, Morin -->
+      <article class="item right" data-era="contemporaneo">
+        <div class="dot" aria-hidden="true"></div>
+        <div class="card">
+          <div class="date">2006 — Agamben, De la Torre, Morin</div>
+          <div class="content">Perspectivas diversas: Agamben y la Gestalt sobre arte y originalidad; De la Torre y Violant en asociacionismo; Morin en cibernética.</div>
+        </div>
+      </article>
+
+      <!-- 2010-2013: Romo, Mota, Marín Sánchez, Chivas -->
+      <article class="item left" data-era="contemporaneo">
+        <div class="dot" aria-hidden="true"></div>
+        <div class="card">
+          <div class="date">2010 - 2013 — Aportes (Romo, Mota, Marín Sánchez, Chivas)</div>
+          <div class="content">Se destacan formulaciones sobre problema-innovación (Romo), arte como comunicación (Mota), motivación personal (Marín Sánchez) y clima pedagógico que fomente creatividad (Chivas).</div>
+        </div>
+      </article>
+
+      <!-- 2012 García, 2012 Marín Sánchez y Troyano -->
+      <article class="item right" data-era="contemporaneo">
+        <div class="dot" aria-hidden="true"></div>
+        <div class="card">
+          <div class="date">2012 — García; Marín Sánchez & Troyano Rodríguez</div>
+          <div class="content">Enfoque neurocientífico que subraya el rol de ambos hemisferios y del lóbulo frontal; y modelos transaccionales que enfatizan la motivación personal.</div>
+        </div>
+      </article>
+
+      <!-- 2013 Chivas (cit. Laime) ya incluido arriba -->
+
+    </section>
+
+    <footer>
+      <p>Diseñado para uso educativo. Puedes descargar esta página como un archivo .html y abrirla en cualquier navegador.</p>
+    </footer>
+  </main>
+
+  <script>
+    // Filtro por época
+    const buttons = document.querySelectorAll('.nav .btn');
+    const items = document.querySelectorAll('.timeline .item');
+
+    function setActive(btn){
+      buttons.forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+
+    function filterEra(era){
+      if(era==='all'){
+        items.forEach(i=>i.classList.remove('hidden'));
+        return;
+      }
+      items.forEach(i=>{
+        i.dataset.era===era ? i.classList.remove('hidden') : i.classList.add('hidden')
+      });
+    }
+
+    buttons.forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const era = btn.dataset.filter;
+        setActive(btn);
+        filterEra(era);
+      })
+    });
+
+    // Al cargar, mostrar todo
+    filterEra('all');
+  </script>
+</body>
+</html>
